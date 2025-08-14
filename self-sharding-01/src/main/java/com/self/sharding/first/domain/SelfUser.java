@@ -9,7 +9,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "user")
+@TableName(value = "t_user")
 public class SelfUser {
 
     @TableId
