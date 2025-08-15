@@ -12,6 +12,7 @@
   <modules>
     <module>self-sharding-pre-jdbc</module>
     <module>self-sharding-01</module>
+    <module>self-sharding-02</module>
   </modules>
 
 </project>
