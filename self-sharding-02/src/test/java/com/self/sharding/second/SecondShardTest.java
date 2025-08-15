@@ -20,7 +20,7 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootTest
-public class FifthShardTest {
+public class SecondShardTest {
 
     @Resource
     private BusinessService businessService;
