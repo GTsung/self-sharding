@@ -93,15 +93,6 @@ public class ShardingConfig {
         return dataSource;
     }
 
-    private List<String> getTables() {
-        return Lists.newArrayList(
-                "t_customer",
-                "t_loan",
-                "t_repay_plan",
-                "t_repay_detail"
-        );
-    }
-
     /**
      * 创建表规则（不配置分表，仅分库）
      */
@@ -110,6 +101,15 @@ public class ShardingConfig {
                 String.format("ds${0..%s}.%s", (dbCount - 1), tableName));
         tableRuleConfiguration.setKeyGeneratorConfig(new KeyGeneratorConfiguration("SNOWFLAKE", "id"));
         return tableRuleConfiguration;
+    }
+
+    private List<String> getTables() {
+        return Lists.newArrayList(
+                "t_customer",
+                "t_loan",
+                "t_repay_plan",
+                "t_repay_detail"
+        );
     }
 
 }
