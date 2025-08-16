@@ -1,50 +1,38 @@
--- 两个库都有这些表
 
-CREATE TABLE IF NOT EXISTS t_loan (
-    id BIGINT NOT NULL,
-    loan_no VARCHAR(36) NOT NULL,
-    customer_no varchar(36) not null,
-    term tinyint(1) not null,
-    loan_amt decimal(8,2) not null,
-    loan_date datetime,
-    PRIMARY KEY (id)
+CREATE DATABASE `ds0`  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
+CREATE DATABASE `ds1`  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
+
+-- 只分库
+CREATE TABLE IF NOT EXISTS t_user (
+    user_id INT NOT NULL AUTO_INCREMENT,
+    user_name VARCHAR(200),
+    user_name_plain VARCHAR(200),
+    pwd VARCHAR(200),
+    assisted_query_pwd VARCHAR(200),
+    PRIMARY KEY (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS t_order (
+    order_id BIGINT AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    address_id BIGINT NOT NULL,
+    status VARCHAR(50),
+    PRIMARY KEY (order_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS t_order_item (
+    order_item_id BIGINT AUTO_INCREMENT,
+    order_id BIGINT,
+    user_id INT NOT NULL,
+    status VARCHAR(50) ,
+    PRIMARY KEY (order_item_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 每个库的数据一致,为广播表
+CREATE TABLE IF NOT EXISTS t_address (
+    address_id BIGINT NOT NULL,
+    address_name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (address_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-CREATE TABLE IF NOT EXISTS t_customer (
-    id BIGINT NOT NULL,
-    name VARCHAR(36) NOT NULL,
-    customer_no varchar(36) not null,
-    age tinyint(1) not null,
-    phone VARCHAR(36) NOT NULL,
-    PRIMARY KEY (id)
- )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
-CREATE TABLE IF NOT EXISTS t_repay_plan (
-    id BIGINT NOT NULL,
-    customer_no varchar(36) not null,
-    loan_no varchar(36) not null,
-    term tinyint(1) not null,
-    capital_code varchar(32) not null,
-    due_date date,
-    repay_date date,
-    grace_date date,
-    principal decimal(12,2),
-    PRIMARY KEY (id)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
-CREATE TABLE IF NOT EXISTS t_repay_detail (
-    id BIGINT NOT NULL,
-    customer_no varchar(36) not null,
-    loan_no varchar(36) not null,
-    repay_no varchar(36) not null,
-    term tinyint(1) not null,
-    capital_code varchar(32) not null,
-    repay_type tinyint(1) not null,
-    cost_item varchar(32) not null,
-    repay_date datetime,
-    repay_amt decimal(12,2),
-    PRIMARY KEY (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
