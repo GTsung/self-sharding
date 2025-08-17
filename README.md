@@ -18,3 +18,7 @@
 ## self-sharding-05
 * 主从
 
+## self-sharding-06
+* 字段加密
+
+

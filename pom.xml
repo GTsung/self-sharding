@@ -15,6 +15,7 @@
     <module>self-sharding-02</module>
       <module>self-sharding-03</module>
       <module>self-sharding-04</module>
+      <module>self-sharding-05</module>
   </modules>
 
 </project>
