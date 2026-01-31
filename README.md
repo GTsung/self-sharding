@@ -21,4 +21,5 @@
 ## self-sharding-06
 * 字段加密
 
-
+## self-sharding-07
+* hint分表
