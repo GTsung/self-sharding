@@ -7,24 +7,16 @@ import java.util.function.Supplier;
 public class HintUtil {
 
     public static <T> T hintAndExecute(String tableName, Long shardingKey, Supplier<T> supplier) {
-        HintManager.clear();
-        HintManager hintManager = HintManager.getInstance();
-        hintManager.addTableShardingValue(tableName, shardingKey);
-        try {
+        try (HintManager hintManager = HintManager.getInstance()) {
+            hintManager.addTableShardingValue(tableName, shardingKey);
             return supplier.get();
-        } finally {
-            HintManager.clear();
         }
     }
 
     public static void hintAndExecute(String tableName, Long shardingKey, Runnable runnable) {
-        HintManager.clear();
-        HintManager hintManager = HintManager.getInstance();
-        hintManager.addTableShardingValue(tableName, shardingKey);
-        try {
+        try (HintManager hintManager = HintManager.getInstance()) {
+            hintManager.addTableShardingValue(tableName, shardingKey);
             runnable.run();
-        } finally {
-            HintManager.clear();
         }
     }
 
